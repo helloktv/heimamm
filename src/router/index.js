@@ -2,15 +2,15 @@
 import Vue from 'vue';
 //导入路由
 import VueRouter from 'vue-router';
-import ceshi from '../components/ceshi.vue'
+import login from '../views/login/login.vue'
 //注册路由
 Vue.use(VueRouter)
 
 //创建路由规则
 const routes=[
     {
-        path:'/info',
-        component:ceshi
+        path:'/login',
+        component:login
     }
 ];
 //创建路由对象

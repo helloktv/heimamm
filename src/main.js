@@ -6,7 +6,8 @@ Vue.use(ElementUI);
 import App from './App.vue'
 import router from './router/index'
 Vue.config.productionTip = false
-
+// 基础样式
+import './style/base.css'
 new Vue({
   render: h => h(App),
   //挂载在vue实例上
