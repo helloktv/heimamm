@@ -71,6 +71,7 @@ export default {
     rgba(20, 147, 250, 1),
     rgba(1, 198, 250, 1)
   );
+  //弹性布局
   display: flex;
   align-items: center;
   justify-content: space-around;
