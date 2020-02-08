@@ -9,19 +9,24 @@
         <div class="line"></div>
         <div class="userLogin">用户登录</div>
       </div>
-      <el-form ref="form" :model="loginForm" label-width="43px">
+      <el-form 
+      :model="loginForm" 
+      label-width="43px"
+      ref="loginForm"
+      :rules="rules"
+      >
         <el-form-item>
           <el-input placeholder="请输入手机号" prefix-icon="el-icon-user" v-model="loginForm.phoneNumber"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="passWord">
           <el-input
             placeholder="请输入密码"
             show-password
             prefix-icon="el-icon-goods"
             v-model="loginForm.passWord"
           ></el-input>
-        </el-form-item>
-        <el-form-item>
+        </el-form-item >
+        <el-form-item prop="securityCode">
           <el-row class="total-row">
             <el-col :span="17">
               <el-input
@@ -37,14 +42,14 @@
           </el-row>
         </el-form-item>
         <el-form-item>
-          <el-checkbox v-model="checked">
+          <el-checkbox v-model="loginForm.checked">
             我已阅读和同意
             <el-link type="primary">隐私协议</el-link>和
             <el-link type="primary">隐私条款</el-link>
           </el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="login buttons">登录</el-button>
+          <el-button type="primary" class="login buttons" @click="submitForm('loginForm')">登录</el-button>
           <el-button type="primary" class="login buttons">注册</el-button>
         </el-form-item>
       </el-form>
@@ -63,9 +68,33 @@ export default {
         passWord: "",
         securityCode: "",
         checked: false
+      },
+      rules: {
+          passWord: [
+            { required: true, message: '密码不能为空', trigger: 'blur' },
+            { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
+          ],
+          securityCode: [
+            { required: true, message: '验证码不能为空', trigger: 'blur' },
+            { min: 4, max: 4,  trigger: 'blur' }
+          ],
       }
+        
+      
     };
-  }
+  },
+  methods: {
+     submitForm(formName) {
+            this.$refs[formName].validate(valid => {
+              if (valid) {
+                this.$message.success('成功了')
+              } else {
+                this.$message.error('失败了')
+                return false;
+              }
+            });
+          },
+  },
 };
 </script>
 
